@@ -5,7 +5,7 @@ export default function ComingSoon() {
     <div className={styles.page}>
       <div className={styles.card}>
         <div className={styles.logoRing}>
-          <span className={styles.logoIcon}>🥐</span>
+          <span className={styles.logoIcon}>🧁</span>
         </div>
 
         <h1 className={styles.brand}>Diana's Creaties</h1>
