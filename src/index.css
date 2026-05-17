@@ -1,0 +1,160 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --cream:    #fdf6ec;
+  --warm:     #f5e6d0;
+  --brown:    #6b3f1f;
+  --brown-light: #9b6340;
+  --gold:     #c8922a;
+  --text:     #3d2410;
+  --text-muted: #8a6a50;
+  --radius:   1rem;
+}
+
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background-color: var(--cream);
+  color: var(--text);
+  min-height: 100dvh;
+}
+
+/* ── Layout ── */
+.page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background:
+    radial-gradient(ellipse at 20% 20%, #f9ead6 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, #f0dfc8 0%, transparent 60%),
+    var(--cream);
+}
+
+/* ── Card ── */
+.card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(200, 146, 42, 0.25);
+  border-radius: var(--radius);
+  box-shadow:
+    0 4px 24px rgba(107, 63, 31, 0.08),
+    0 1px 4px rgba(107, 63, 31, 0.06);
+  padding: 3rem 2.5rem;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* ── Logo ring ── */
+.logo-ring {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--warm);
+  border: 3px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(200, 146, 42, 0.2);
+}
+
+.logo-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+/* ── Brand name ── */
+.brand {
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--brown);
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+
+.tagline {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-style: italic;
+  letter-spacing: 0.03em;
+}
+
+/* ── Divider ── */
+.divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  border-radius: 999px;
+}
+
+/* ── Badge ── */
+.badge {
+  display: inline-block;
+  background: var(--gold);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35rem 1.1rem;
+  border-radius: 999px;
+}
+
+/* ── Message ── */
+.message {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ── Contact block ── */
+.contact {
+  background: var(--warm);
+  border-radius: calc(var(--radius) - 0.25rem);
+  padding: 1rem 1.5rem;
+  width: 100%;
+}
+
+.contact p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.email-link {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.email-link:hover {
+  color: var(--brown);
+  text-decoration: underline;
+}
+
+/* ── Footer ── */
+.footer {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .card {
+    padding: 2rem 1.25rem;
+  }
+}
