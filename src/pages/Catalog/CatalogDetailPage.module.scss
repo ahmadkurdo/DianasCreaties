@@ -1,0 +1,174 @@
+@use '../../styles/variables' as *;
+
+.page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background:
+    radial-gradient(ellipse at 20% 20%, #f9ead6 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, #f0dfc8 0%, transparent 60%),
+    $cream;
+}
+
+.content {
+  width: min(100%, 1000px);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  color: $brown;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $gold;
+    outline-offset: 3px;
+  }
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid rgba($gold, 0.25);
+  border-radius: calc($radius - 0.25rem);
+  background: rgba(255, 255, 255, 0.82);
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.info {
+  padding: 2rem;
+
+  @media (max-width: 480px) {
+    padding: 1.25rem;
+  }
+}
+
+.sampleLabel {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba($gold, 0.14);
+  color: $brown;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.title {
+  margin-bottom: 0.75rem;
+  color: $brown;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  line-height: 1.15;
+}
+
+.description {
+  color: $text-muted;
+  line-height: 1.65;
+}
+
+.price {
+  margin-top: 1rem;
+  color: $brown;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.detailsList {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0 1.5rem;
+  padding-left: 1.25rem;
+  color: $text-muted;
+  line-height: 1.5;
+}
+
+.contact {
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba($gold, 0.25);
+
+  h2 {
+    margin-bottom: 0.4rem;
+    color: $brown;
+    font-size: 1.1rem;
+  }
+
+  p {
+    color: $text-muted;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1rem;
+  border: 1px solid $gold;
+  border-radius: calc($radius - 0.25rem);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: 3px solid $gold;
+    outline-offset: 3px;
+  }
+}
+
+.primaryAction {
+  background: $gold;
+  color: #fff;
+
+  &:hover {
+    background: $brown;
+    border-color: $brown;
+  }
+}
+
+.secondaryAction {
+  background: transparent;
+  color: $brown;
+
+  &:hover {
+    background: $warm;
+  }
+}
+
+.sampleNote {
+  margin-top: 0.75rem;
+  color: $text-muted;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.footer {
+  margin-top: 2rem;
+  color: $text-muted;
+  font-size: 0.8rem;
+  text-align: center;
+}
