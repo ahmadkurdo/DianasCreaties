@@ -1,4 +1,5 @@
 import styles from './ComingSoon.module.scss'
+import { Link } from 'react-router-dom'
 
 export default function ComingSoon() {
   return (
@@ -13,34 +14,44 @@ export default function ComingSoon() {
 
         <div className={styles.divider} />
 
-        <div className={styles.badge}>Binnenkort beschikbaar</div>
+        <h2 className={styles.prompt}>Ontdek wat we voor u maken</h2>
 
-        <p className={styles.message}>
-          We zijn druk bezig met het bakken van iets bijzonders voor u.
-          <br />
-          Kom snel terug voor onze nieuwe website!
-        </p>
+        <div className={styles.options}>
+          <Link to="/workshops" className={styles.option}>
+            <span className={styles.optionIcon} aria-hidden="true">🧁</span>
+            <span className={styles.optionTitle}>Workshops</span>
+            <span className={styles.optionHint}>Leer zelf iets lekkers maken</span>
+            <span className={styles.optionArrow} aria-hidden="true">→</span>
+          </Link>
+          <Link to="/cakes" className={styles.option}>
+            <span className={styles.optionIcon} aria-hidden="true">🎂</span>
+            <span className={styles.optionTitle}>Cakes</span>
+            <span className={styles.optionHint}>Bekijk ons gebak</span>
+            <span className={styles.optionArrow} aria-hidden="true">→</span>
+          </Link>
+        </div>
 
-        <div className={styles.contact}>
-          <p>Meer informatie vindt u op onze Facebook-groep of neem contact op via WhatsApp:</p>
-          <div className={styles.contactLinks}>
-            <a
-              href="https://www.facebook.com/share/1GNMzwspKt/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.contactLink}
-            >
-              Facebook-groep
-            </a>
-            <a
-              href="https://wa.me/31615246591"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.contactLink}
-            >
-              WhatsApp
-            </a>
+        <div className={styles.socialLinks}>
+          <div className={styles.contactIntro}>
+            <h2 className={styles.contactTitle}>Contact</h2>
+            <p className={styles.contactHint}>Stuur ons een bericht via WhatsApp of bezoek onze Facebook-groep.</p>
           </div>
+          <a
+            href="https://www.facebook.com/share/1GNMzwspKt/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.socialLink}
+          >
+            Facebook-groep
+          </a>
+          <a
+            href="https://wa.me/31615246591"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.socialLink}
+          >
+            WhatsApp
+          </a>
         </div>
       </div>
 

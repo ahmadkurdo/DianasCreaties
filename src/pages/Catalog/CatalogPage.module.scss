@@ -1,0 +1,154 @@
+@use '../../styles/variables' as *;
+
+.page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background:
+    radial-gradient(ellipse at 20% 20%, #f9ead6 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, #f0dfc8 0%, transparent 60%),
+    $cream;
+}
+
+.content {
+  width: min(100%, 720px);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: $brown;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $gold;
+    outline-offset: 3px;
+  }
+}
+
+.title {
+  margin-bottom: 1.5rem;
+  color: $brown;
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1.15;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  overflow: hidden;
+  display: block;
+  border: 1px solid rgba($gold, 0.25);
+  border-radius: calc($radius - 0.25rem);
+  background: rgba(255, 255, 255, 0.75);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 5px 16px rgba($brown, 0.1);
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible {
+    outline: 3px solid $gold;
+    outline-offset: 3px;
+  }
+
+  h2,
+  p,
+  .sampleLabel {
+    margin-right: 1.25rem;
+    margin-left: 1.25rem;
+  }
+
+  h2 {
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+    color: $brown;
+    font-size: 1.2rem;
+  }
+
+  p {
+    margin-bottom: 0.75rem;
+    color: $text-muted;
+    line-height: 1.6;
+  }
+}
+
+.imageFrame {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: $warm;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imagePlaceholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.55), transparent 60%),
+    $warm;
+  color: $brown-light;
+  font-size: 0.875rem;
+}
+
+.placeholderIcon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.sampleLabel {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba($gold, 0.14);
+  color: $brown;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.emptyState {
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid $gold;
+  background: rgba(255, 255, 255, 0.6);
+  color: $text-muted;
+  line-height: 1.6;
+}
+
+.footer {
+  margin-top: 2rem;
+  color: $text-muted;
+  font-size: 0.8rem;
+  text-align: center;
+}
