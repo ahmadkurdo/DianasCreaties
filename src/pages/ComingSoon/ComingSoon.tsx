@@ -1,35 +1,33 @@
 import styles from './ComingSoon.module.scss'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiChevronDown, FiGift, FiLayers, FiTruck } from 'react-icons/fi'
+import { fetchCakeInformation, type CakeInformation } from '@/data/catalog'
 
-const fillingFlavours = [
-  'Vanille',
-  'Aardbei',
-  'Lemon',
-  'Bosvruchten',
-  'Mango',
-  'Sinaasappel',
-  'Peer',
-  'Ananas',
-  'Sinaasappel/perzik',
-  'Chocolade (wit, melk of puur)',
-  'Nutella met geroosterde hazelnoten',
-  'Bonbonbloc',
-  'Toblerone',
-  'Oreo',
-  'Bokkenpootjes',
-  'Amaretto (meerprijs € 0,50 p.p.)',
-  'Baileys (meerprijs € 0,50 p.p.)',
-  'Likeur 43 (meerprijs € 0,50 p.p.)',
-  'Champagne (meerprijs € 0,50 p.p.)',
-  'Aardbeienjam',
-  'Bosvruchtenjam',
-  'Lemoncurd',
-  'Vlaaivulling (aardbei/kersen)',
-  'Seizoensfruit stukjes in de vulling (meerprijs € 0,25 p.p.)',
-]
+type CakeInformationState =
+  | { status: 'loading' }
+  | { status: 'error' }
+  | { status: 'ready'; content: CakeInformation }
 
 export default function ComingSoon() {
+  const [cakeInformation, setCakeInformation] = useState<CakeInformationState>({ status: 'loading' })
+
+  useEffect(() => {
+    let active = true
+
+    fetchCakeInformation()
+      .then((content) => {
+        if (active) setCakeInformation(content ? { status: 'ready', content } : { status: 'error' })
+      })
+      .catch(() => {
+        if (active) setCakeInformation({ status: 'error' })
+      })
+
+    return () => {
+      active = false
+    }
+  }, [])
+
   return (
     <div className={styles.page}>
       <div className={styles.card}>
@@ -69,77 +67,88 @@ export default function ComingSoon() {
 
       <section className={styles.cakeInfo} aria-labelledby="cake-info-heading">
         <div className={styles.infoHeading}>
-          <h2 id="cake-info-heading">Meer over onze taarten</h2>
+          <h2 id="cake-info-heading">
+            {cakeInformation.status === 'ready' ? cakeInformation.content.heading || 'Meer over onze taarten' : 'Meer over onze taarten'}
+          </h2>
         </div>
 
-        <details className={styles.infoSection}>
-          <summary>
-            <span className={styles.infoIcon}><FiGift aria-hidden="true" /></span>
-            <span className={styles.infoLabel}>
-              <span className={styles.infoTitle}>Taarten op maat</span>
-              <span className={styles.infoHint}>Uw wensen, kleuren en decoraties</span>
-            </span>
-            <FiChevronDown className={styles.infoChevron} aria-hidden="true" />
-          </summary>
-          <div className={styles.infoContent}>
-            <p>
-              Onze taarten worden gemaakt van biscuitdeeg en gevuld met crème en een laagje jam.
-              Naar wens en afhankelijk van het seizoen kan er ook vers fruit in verwerkt worden.
-            </p>
-            <p>
-              De taart wordt bekleed met marsepein of fondant in een kleur naar keuze. Decoraties
-              kunnen bij een thema passen en een fotoprint is ook mogelijk. Geef uw wensen aan ons door.
-            </p>
-          </div>
-        </details>
+        {cakeInformation.status === 'loading' ? (
+          <p className={styles.infoStatus} role="status">De taartinformatie wordt geladen...</p>
+        ) : cakeInformation.status === 'error' ? (
+          <p className={styles.infoStatus}>
+            De taartinformatie is momenteel niet beschikbaar. <Link to="/contact">Neem contact met ons op.</Link>
+          </p>
+        ) : (
+          <>
+            <details className={styles.infoSection}>
+              <summary>
+                <span className={styles.infoIcon}><FiGift aria-hidden="true" /></span>
+                <span className={styles.infoLabel}>
+                  <span className={styles.infoTitle}>{cakeInformation.content.customCakes?.title}</span>
+                  <span className={styles.infoHint}>{cakeInformation.content.customCakes?.subtitle}</span>
+                </span>
+                <FiChevronDown className={styles.infoChevron} aria-hidden="true" />
+              </summary>
+              <div className={styles.infoContent}>
+                {(cakeInformation.content.customCakes?.paragraphs ?? []).map((paragraph, index) => (
+                  <p key={`${index}-${paragraph}`}>{paragraph}</p>
+                ))}
+              </div>
+            </details>
 
-        <details className={styles.infoSection}>
-          <summary>
-            <span className={styles.infoIcon}><FiLayers aria-hidden="true" /></span>
-            <span className={styles.infoLabel}>
-              <span className={styles.infoTitle}>Smaken van vullingen</span>
-              <span className={styles.infoHint}>Van fruitig tot chocolade</span>
-            </span>
-            <FiChevronDown className={styles.infoChevron} aria-hidden="true" />
-          </summary>
-          <div className={styles.infoContent}>
-            <ul className={styles.flavourList}>
-              {fillingFlavours.map((flavour) => <li key={flavour}>{flavour}</li>)}
-            </ul>
-          </div>
-        </details>
+            <details className={styles.infoSection}>
+              <summary>
+                <span className={styles.infoIcon}><FiLayers aria-hidden="true" /></span>
+                <span className={styles.infoLabel}>
+                  <span className={styles.infoTitle}>{cakeInformation.content.fillings?.title}</span>
+                  <span className={styles.infoHint}>{cakeInformation.content.fillings?.subtitle}</span>
+                </span>
+                <FiChevronDown className={styles.infoChevron} aria-hidden="true" />
+              </summary>
+              <div className={styles.infoContent}>
+                <ul className={styles.flavourList}>
+                  {(cakeInformation.content.fillings?.items ?? []).map((flavour, index) => (
+                    <li key={`${index}-${flavour}`}>{flavour}</li>
+                  ))}
+                </ul>
+              </div>
+            </details>
 
-        <details className={styles.infoSection}>
-          <summary>
-            <span className={styles.infoIcon}><FiTruck aria-hidden="true" /></span>
-            <span className={styles.infoLabel}>
-              <span className={styles.infoTitle}>Prijzen, bezorgen en bestellen</span>
-              <span className={styles.infoHint}>Alles voor uw bestelling</span>
-            </span>
-            <FiChevronDown className={styles.infoChevron} aria-hidden="true" />
-          </summary>
-          <div className={styles.infoContent}>
-            <h3>Prijsindicatie</h3>
-            <ul>
-              <li>Vanaf € 5,50 per persoon, afhankelijk van de vulling en uitvoering.</li>
-              <li>Puzzelplaatjes op een taart: € 10,00 extra.</li>
-              <li>3-dimensionale taarten: € 6,50 per persoon.</li>
-            </ul>
-            <h3>Bezorgen</h3>
-            <ul>
-              <li>Binnen Vlaardingen: € 15,00.</li>
-              <li>Buiten Vlaardingen: € 1,50 per km, heen en terug.</li>
-            </ul>
-            <h3>Bestellen en betalen</h3>
-            <p>
-              Bestellen kan telefonisch, per e-mail of persoonlijk. De bestelling moet van tevoren
-              worden betaald op ING rekeningnummer NL15 INGB 0007 0678 49 ten name van Diana's Creaties te Vlaardingen.
-            </p>
-            <p>
-              Neem <Link to="/contact">contact met ons op</Link> om uw wensen, de actuele prijs en beschikbaarheid te bespreken.
-            </p>
-          </div>
-        </details>
+            <details className={styles.infoSection}>
+              <summary>
+                <span className={styles.infoIcon}><FiTruck aria-hidden="true" /></span>
+                <span className={styles.infoLabel}>
+                  <span className={styles.infoTitle}>{cakeInformation.content.ordering?.title}</span>
+                  <span className={styles.infoHint}>{cakeInformation.content.ordering?.subtitle}</span>
+                </span>
+                <FiChevronDown className={styles.infoChevron} aria-hidden="true" />
+              </summary>
+              <div className={styles.infoContent}>
+                <h3>{cakeInformation.content.ordering?.pricingTitle}</h3>
+                <ul>
+                  {(cakeInformation.content.ordering?.pricingItems ?? []).map((item, index) => (
+                    <li key={`${index}-${item}`}>{item}</li>
+                  ))}
+                </ul>
+                <h3>{cakeInformation.content.ordering?.deliveryTitle}</h3>
+                <ul>
+                  {(cakeInformation.content.ordering?.deliveryItems ?? []).map((item, index) => (
+                    <li key={`${index}-${item}`}>{item}</li>
+                  ))}
+                </ul>
+                <h3>{cakeInformation.content.ordering?.orderTitle}</h3>
+                <p>{cakeInformation.content.ordering?.orderText}</p>
+                {cakeInformation.content.ordering?.contactLink && (
+                  <p>
+                    {cakeInformation.content.ordering.contactBefore}{' '}
+                    <Link to="/contact">{cakeInformation.content.ordering.contactLink}</Link>{' '}
+                    {cakeInformation.content.ordering.contactAfter}
+                  </p>
+                )}
+              </div>
+            </details>
+          </>
+        )}
       </section>
 
       <footer className={styles.footer}>

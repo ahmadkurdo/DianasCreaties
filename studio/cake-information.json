@@ -1,0 +1,45 @@
+{
+  "_id": "cakeInformation",
+  "_type": "cakeInformation",
+  "heading": "Meer over onze taarten",
+  "customCakes": {
+    "title": "Taarten op maat",
+    "subtitle": "Uw wensen, kleuren en decoraties",
+    "paragraphs": [
+      "Onze taarten worden gemaakt van biscuitdeeg en gevuld met crème en een laagje jam. Naar wens en afhankelijk van het seizoen kan er ook vers fruit in verwerkt worden.",
+      "De taart wordt bekleed met marsepein of fondant in een kleur naar keuze. Decoraties kunnen bij een thema passen en een fotoprint is ook mogelijk. Geef uw wensen aan ons door."
+    ]
+  },
+  "fillings": {
+    "title": "Smaken van vullingen",
+    "subtitle": "Van fruitig tot chocolade",
+    "items": [
+      "Vanille", "Aardbei", "Lemon", "Bosvruchten", "Mango", "Sinaasappel", "Peer", "Ananas",
+      "Sinaasappel/perzik", "Chocolade (wit, melk of puur)", "Nutella met geroosterde hazelnoten",
+      "Bonbonbloc", "Toblerone", "Oreo", "Bokkenpootjes", "Amaretto (meerprijs € 0,50 p.p.)",
+      "Baileys (meerprijs € 0,50 p.p.)", "Likeur 43 (meerprijs € 0,50 p.p.)",
+      "Champagne (meerprijs € 0,50 p.p.)", "Aardbeienjam", "Bosvruchtenjam", "Lemoncurd",
+      "Vlaaivulling (aardbei/kersen)", "Seizoensfruit stukjes in de vulling (meerprijs € 0,25 p.p.)"
+    ]
+  },
+  "ordering": {
+    "title": "Prijzen, bezorgen en bestellen",
+    "subtitle": "Alles voor uw bestelling",
+    "pricingTitle": "Prijsindicatie",
+    "pricingItems": [
+      "Vanaf € 5,50 per persoon, afhankelijk van de vulling en uitvoering.",
+      "Puzzelplaatjes op een taart: € 10,00 extra.",
+      "3-dimensionale taarten: € 6,50 per persoon."
+    ],
+    "deliveryTitle": "Bezorgen",
+    "deliveryItems": [
+      "Binnen Vlaardingen: € 15,00.",
+      "Buiten Vlaardingen: € 1,50 per km, heen en terug."
+    ],
+    "orderTitle": "Bestellen en betalen",
+    "orderText": "Bestellen kan telefonisch, per e-mail of persoonlijk. De bestelling moet van tevoren worden betaald op ING rekeningnummer NL15 INGB 0007 0678 49 ten name van Diana's Creaties te Vlaardingen.",
+    "contactBefore": "Neem",
+    "contactLink": "contact met ons op",
+    "contactAfter": "om uw wensen, de actuele prijs en beschikbaarheid te bespreken."
+  }
+}

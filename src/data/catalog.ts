@@ -13,6 +13,25 @@ export interface CatalogItem {
   isSample: boolean
 }
 
+export interface CakeInformation {
+  heading?: string
+  customCakes?: { title?: string; subtitle?: string; paragraphs?: string[] }
+  fillings?: { title?: string; subtitle?: string; items?: string[] }
+  ordering?: {
+    title?: string
+    subtitle?: string
+    pricingTitle?: string
+    pricingItems?: string[]
+    deliveryTitle?: string
+    deliveryItems?: string[]
+    orderTitle?: string
+    orderText?: string
+    contactBefore?: string
+    contactLink?: string
+    contactAfter?: string
+  }
+}
+
 const projectId = import.meta.env.VITE_SANITY_PROJECT_ID?.trim()
 const dataset = import.meta.env.VITE_SANITY_DATASET?.trim() || 'production'
 
@@ -43,4 +62,15 @@ export async function fetchCatalogItems(category: CatalogCategory): Promise<Cata
   }
 
   return client.fetch<CatalogItem[]>(catalogQuery, { category })
+}
+
+export async function fetchCakeInformation(): Promise<CakeInformation | null> {
+  if (!client) {
+    throw new Error('Set VITE_SANITY_PROJECT_ID to connect to the CMS.')
+  }
+
+  return client.fetch<CakeInformation | null>(
+    '*[_type == "cakeInformation" && _id == $id][0]{heading, customCakes, fillings, ordering}',
+    { id: 'cakeInformation' },
+  )
 }

@@ -60,7 +60,7 @@ The API client uses the CDN and the `published` perspective. Published content m
 
 The list and detail pages are shared components. Their `category` prop tells the CMS hook which category to query. The detail page uses the URL slug to find the selected record.
 
-The home page also has expandable sections for custom cakes, filling flavours, pricing, delivery, and ordering. This shared information is currently maintained in `src/pages/ComingSoon/ComingSoon.tsx`, not in Sanity.
+The home page also has expandable sections for custom cakes, filling flavours, pricing, delivery, and ordering. The published `cakeInformation` document in Sanity supplies this content; the home page fetches it through `src/data/catalog.ts`. If the document is missing or the request fails, a contact link is shown instead.
 
 ### Contact and reservations
 
@@ -92,7 +92,9 @@ The local Studio is available at `http://localhost:3333/studio` while `npm run c
 
 To add an item, create a **Catalog item**, fill in its name, slug, category, description, and any optional details, then publish it. Add a Sanity photo or an external image URL if desired. Published entries appear under the matching website category. To remove an item, delete its document in Studio. Unpublished drafts are not returned by the public website query.
 
-The Studio uses the schema in `studio/schemaTypes/catalogItem.ts` and the project settings in `sanity.config.ts`. `sanity.cli.ts` configures CLI commands and loads `.env` with `dotenv/config`.
+To edit the home page cake information, select **Taartinformatie** in Studio, edit the desired fields, and publish the document. The document has the fixed ID `cakeInformation`. The initial content is available in `studio/cake-information.json`; `npx sanity documents create studio/cake-information.json --missing` creates it only if it does not already exist. Check for an existing draft before initializing a new dataset.
+
+The Studio uses the schemas in `studio/schemaTypes/catalogItem.ts` and `studio/schemaTypes/cakeInformation.ts` and the project settings in `sanity.config.ts`. `sanity.cli.ts` configures CLI commands and loads `.env` with `dotenv/config`.
 
 To host the Studio so an editor can access it without running the local development server, run `npx sanity deploy` after the project is configured and signed in. This deploys the editor UI; the Sanity dataset is already hosted separately. The Studio can also be built locally with `npm run cms:build`; specify a separate `--output-path` if you need to keep its build output separate from the website's `dist` directory.
 
@@ -183,6 +185,8 @@ The catalog grid changes column count to fit available width. The detail layout 
 | `sanity.config.ts` | Studio configuration |
 | `sanity.cli.ts` | Sanity CLI project config and local environment loading |
 | `studio/schemaTypes/catalogItem.ts` | Editable content schema |
+| `studio/schemaTypes/cakeInformation.ts` | Editable home-page cake information schema |
+| `studio/cake-information.json` | Initial cake information for a new dataset |
 | `studio/seed.ndjson` | Six importable sample records |
 | `.env.example` | Local CMS environment template |
 | `Dockerfile` and `nginx.conf` | Production website container and static hosting |
