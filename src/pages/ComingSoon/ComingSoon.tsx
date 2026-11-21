@@ -29,30 +29,14 @@ export default function ComingSoon() {
             <span className={styles.optionHint}>Bekijk ons gebak</span>
             <span className={styles.optionArrow} aria-hidden="true">→</span>
           </Link>
+          <Link to="/contact" className={styles.option}>
+            <span className={styles.optionIcon} aria-hidden="true">✉️</span>
+            <span className={styles.optionTitle}>Contact</span>
+            <span className={styles.optionHint}>Onze contactgegevens</span>
+            <span className={styles.optionArrow} aria-hidden="true">→</span>
+          </Link>
         </div>
 
-        <div className={styles.socialLinks}>
-          <div className={styles.contactIntro}>
-            <h2 className={styles.contactTitle}>Contact</h2>
-            <p className={styles.contactHint}>Stuur ons een bericht via WhatsApp of bezoek onze Facebook-groep.</p>
-          </div>
-          <a
-            href="https://www.facebook.com/share/1GNMzwspKt/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.socialLink}
-          >
-            Facebook-groep
-          </a>
-          <a
-            href="https://wa.me/31615246591"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.socialLink}
-          >
-            WhatsApp
-          </a>
-        </div>
       </div>
 
       <footer className={styles.footer}>

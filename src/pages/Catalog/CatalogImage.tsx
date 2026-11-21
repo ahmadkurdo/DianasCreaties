@@ -7,7 +7,7 @@ interface CatalogImageProps {
 }
 
 export default function CatalogImage({ item }: CatalogImageProps) {
-  const [hasImage, setHasImage] = useState(true)
+  const [hasImage, setHasImage] = useState(Boolean(item.imageUrl))
 
   return (
     <div className={styles.imageFrame}>
@@ -20,9 +20,9 @@ export default function CatalogImage({ item }: CatalogImageProps) {
           onError={() => setHasImage(false)}
         />
       ) : (
-        <div className={styles.imagePlaceholder} role="img" aria-label={`${item.imageLabel}, voorbeeldafbeelding`}>
+        <div className={styles.imagePlaceholder} role="img" aria-label={`${item.imageLabel}, foto volgt`}>
           <span className={styles.placeholderIcon} aria-hidden="true">🧁</span>
-          <span>Voorbeeldfoto</span>
+          <span>Foto volgt</span>
         </div>
       )}
     </div>

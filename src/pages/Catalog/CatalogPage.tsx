@@ -1,21 +1,16 @@
 import { Link } from 'react-router-dom'
-import { cakes, workshops, type CatalogItem } from '@/data/catalog'
+import { type CatalogCategory } from '@/data/catalog'
+import useCatalogItems from '@/data/useCatalogItems'
 import CatalogImage from './CatalogImage'
 import styles from './CatalogPage.module.scss'
-
-type CatalogCategory = 'workshops' | 'cakes'
 
 interface CatalogPageProps {
   category: CatalogCategory
 }
 
-const catalogConfig: Record<CatalogCategory, { title: string; items: CatalogItem[] }> = {
-  workshops: { title: 'Workshops', items: workshops },
-  cakes: { title: 'Cakes', items: cakes },
-}
-
 export default function CatalogPage({ category }: CatalogPageProps) {
-  const { title, items } = catalogConfig[category]
+  const { status, items } = useCatalogItems(category)
+  const title = category === 'workshops' ? 'Workshops' : 'Cakes'
 
   return (
     <main className={styles.page}>
@@ -25,7 +20,11 @@ export default function CatalogPage({ category }: CatalogPageProps) {
         </Link>
         <h1 className={styles.title}>{title}</h1>
 
-        {items.length > 0 ? (
+        {status === 'loading' ? (
+          <p className={styles.emptyState}>De catalogus wordt geladen...</p>
+        ) : status === 'error' ? (
+          <p className={styles.emptyState}>De catalogus is momenteel niet beschikbaar.</p>
+        ) : items.length > 0 ? (
           <ul className={styles.list}>
             {items.map((item) => (
               <li key={item.id}>
@@ -33,7 +32,9 @@ export default function CatalogPage({ category }: CatalogPageProps) {
                   <CatalogImage item={item} />
                   <h2>{item.name}</h2>
                   <p>{item.description}</p>
-                  <span className={styles.sampleLabel}>Voorbeeld · Meer informatie</span>
+                  <span className={styles.sampleLabel}>
+                    {item.isSample ? 'Voorbeeld · ' : ''}Meer informatie
+                  </span>
                 </Link>
               </li>
             ))}

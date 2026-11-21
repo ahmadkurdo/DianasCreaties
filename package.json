@@ -6,18 +6,25 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cms": "sanity dev --port 3333",
+    "cms:build": "sanity build"
   },
   "dependencies": {
+    "@sanity/client": "^8.17.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-icons": "^5.7.0",
     "react-router-dom": "^7.18.6"
   },
   "devDependencies": {
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
+    "dotenv": "^18.0.10",
+    "sanity": "^4.22.1",
     "sass": "^1.83.0",
+    "styled-components": "^6.6.0",
     "typescript": "^5.6.2",
     "vite": "^6.0.3"
   }

@@ -1,25 +1,36 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { cakes, workshops, type CatalogItem } from '@/data/catalog'
+import { type CatalogCategory } from '@/data/catalog'
+import useCatalogItems from '@/data/useCatalogItems'
 import CatalogImage from './CatalogImage'
 import styles from './CatalogDetailPage.module.scss'
 
-type CatalogCategory = 'workshops' | 'cakes'
-
 interface CatalogDetailPageProps {
   category: CatalogCategory
-}
-
-const catalogConfig: Record<CatalogCategory, { title: string; items: CatalogItem[] }> = {
-  workshops: { title: 'Workshops', items: workshops },
-  cakes: { title: 'Cakes', items: cakes },
 }
 
 const facebookUrl = 'https://www.facebook.com/share/1GNMzwspKt/'
 const whatsappUrl = 'https://wa.me/31615246591'
 
 export default function CatalogDetailPage({ category }: CatalogDetailPageProps) {
-  const { title, items } = catalogConfig[category]
+  const { status, items } = useCatalogItems(category)
   const { id: itemId } = useParams<{ id: string }>()
+  const title = category === 'workshops' ? 'Workshops' : 'Cakes'
+
+  if (status !== 'ready') {
+    return (
+      <main className={styles.page}>
+        <section className={styles.content}>
+          <Link to={`/${category}`} className={styles.backLink}>
+            <span aria-hidden="true">←</span> Terug naar {title.toLowerCase()}
+          </Link>
+          <p className={styles.sampleNote}>
+            {status === 'loading' ? 'De informatie wordt geladen...' : 'De informatie is momenteel niet beschikbaar.'}
+          </p>
+        </section>
+      </main>
+    )
+  }
+
   const item = items.find((catalogItem) => catalogItem.id === itemId)
 
   if (!item) {
@@ -40,7 +51,7 @@ export default function CatalogDetailPage({ category }: CatalogDetailPageProps) 
         <article className={styles.detail}>
           <CatalogImage item={item} />
           <div className={styles.info}>
-            <span className={styles.sampleLabel}>Voorbeeld</span>
+            {item.isSample && <span className={styles.sampleLabel}>Voorbeeld</span>}
             <h1 className={styles.title}>{item.name}</h1>
             <p className={styles.description}>{item.description}</p>
             <p className={styles.price}>{item.priceLabel}</p>
@@ -67,7 +78,9 @@ export default function CatalogDetailPage({ category }: CatalogDetailPageProps) 
             </section>
           </div>
         </article>
-        <p className={styles.sampleNote}>Dit is voorbeeldinformatie. Prijs, inhoud en beschikbaarheid kunnen afwijken.</p>
+        {item.isSample && (
+          <p className={styles.sampleNote}>Dit is voorbeeldinformatie. Prijs, inhoud en beschikbaarheid kunnen afwijken.</p>
+        )}
       </section>
       <footer className={styles.footer}>
         &copy; {new Date().getFullYear()} Diana's Creaties. Alle rechten voorbehouden.
