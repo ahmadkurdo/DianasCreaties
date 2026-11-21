@@ -1,6 +1,33 @@
 import styles from './ComingSoon.module.scss'
 import { Link } from 'react-router-dom'
 
+const fillingFlavours = [
+  'Vanille',
+  'Aardbei',
+  'Lemon',
+  'Bosvruchten',
+  'Mango',
+  'Sinaasappel',
+  'Peer',
+  'Ananas',
+  'Sinaasappel/perzik',
+  'Chocolade (wit, melk of puur)',
+  'Nutella met geroosterde hazelnoten',
+  'Bonbonbloc',
+  'Toblerone',
+  'Oreo',
+  'Bokkenpootjes',
+  'Amaretto (meerprijs € 0,50 p.p.)',
+  'Baileys (meerprijs € 0,50 p.p.)',
+  'Likeur 43 (meerprijs € 0,50 p.p.)',
+  'Champagne (meerprijs € 0,50 p.p.)',
+  'Aardbeienjam',
+  'Bosvruchtenjam',
+  'Lemoncurd',
+  'Vlaaivulling (aardbei/kersen)',
+  'Seizoensfruit stukjes in de vulling (meerprijs € 0,25 p.p.)',
+]
+
 export default function ComingSoon() {
   return (
     <div className={styles.page}>
@@ -38,6 +65,58 @@ export default function ComingSoon() {
         </div>
 
       </div>
+
+      <section className={styles.cakeInfo} aria-labelledby="cake-info-heading">
+        <h2 id="cake-info-heading">Meer over onze taarten</h2>
+
+        <details className={styles.infoSection}>
+          <summary>Taarten op maat</summary>
+          <div className={styles.infoContent}>
+            <p>
+              Onze taarten worden gemaakt van biscuitdeeg en gevuld met crème en een laagje jam.
+              Naar wens en afhankelijk van het seizoen kan er ook vers fruit in verwerkt worden.
+            </p>
+            <p>
+              De taart wordt bekleed met marsepein of fondant in een kleur naar keuze. Decoraties
+              kunnen bij een thema passen en een fotoprint is ook mogelijk. Geef uw wensen aan ons door.
+            </p>
+          </div>
+        </details>
+
+        <details className={styles.infoSection}>
+          <summary>Smaken van vullingen</summary>
+          <div className={styles.infoContent}>
+            <ul className={styles.flavourList}>
+              {fillingFlavours.map((flavour) => <li key={flavour}>{flavour}</li>)}
+            </ul>
+          </div>
+        </details>
+
+        <details className={styles.infoSection}>
+          <summary>Prijzen, bezorgen en bestellen</summary>
+          <div className={styles.infoContent}>
+            <h3>Prijsindicatie</h3>
+            <ul>
+              <li>Vanaf € 5,50 per persoon, afhankelijk van de vulling en uitvoering.</li>
+              <li>Puzzelplaatjes op een taart: € 10,00 extra.</li>
+              <li>3-dimensionale taarten: € 6,50 per persoon.</li>
+            </ul>
+            <h3>Bezorgen</h3>
+            <ul>
+              <li>Binnen Vlaardingen: € 15,00.</li>
+              <li>Buiten Vlaardingen: € 1,50 per km, heen en terug.</li>
+            </ul>
+            <h3>Bestellen en betalen</h3>
+            <p>
+              Bestellen kan telefonisch, per e-mail of persoonlijk. De bestelling moet van tevoren
+              worden betaald op ING rekeningnummer NL15 INGB 0007 0678 49 ten name van Diana's Creaties te Vlaardingen.
+            </p>
+            <p>
+              Neem <Link to="/contact">contact met ons op</Link> om uw wensen, de actuele prijs en beschikbaarheid te bespreken.
+            </p>
+          </div>
+        </details>
+      </section>
 
       <footer className={styles.footer}>
         &copy; {new Date().getFullYear()} Diana's Creaties. Alle rechten voorbehouden.

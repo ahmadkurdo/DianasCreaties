@@ -60,6 +60,8 @@ The API client uses the CDN and the `published` perspective. Published content m
 
 The list and detail pages are shared components. Their `category` prop tells the CMS hook which category to query. The detail page uses the URL slug to find the selected record.
 
+The home page also has expandable sections for custom cakes, filling flavours, pricing, delivery, and ordering. This shared information is currently maintained in `src/pages/ComingSoon/ComingSoon.tsx`, not in Sanity.
+
 ### Contact and reservations
 
 The detail page builds a WhatsApp link with a URL-encoded message that includes the item's name. This is an inquiry, not a booking system: Diana confirms availability and reservations by replying. The Facebook link opens the existing group. The contact page also provides both contact links. The contact page's business details are maintained in the website source, not the CMS.

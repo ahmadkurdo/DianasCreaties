@@ -44,6 +44,7 @@ export default function CatalogPage({ category }: CatalogPageProps) {
             Er zijn op dit moment geen {category === 'workshops' ? 'workshops' : 'cakes'} beschikbaar.
           </p>
         )}
+
       </section>
       <footer className={styles.footer}>
         &copy; {new Date().getFullYear()} Diana's Creaties. Alle rechten voorbehouden.
