@@ -1,0 +1,66 @@
+@use '../../styles/variables' as *;
+
+.card {
+  max-width: 520px;
+}
+
+.heading {
+  color: $brown;
+  font-size: 1.25rem;
+}
+
+.message {
+  max-width: 360px;
+  color: $text-muted;
+  line-height: 1.7;
+}
+
+.contact {
+  width: 100%;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba($gold, 0.25);
+
+  h2 {
+    margin-bottom: 0.4rem;
+    color: $brown;
+    font-size: 1rem;
+  }
+
+  p {
+    color: $text-muted;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.45rem 1rem;
+    border: 1px solid $gold;
+    border-radius: 999px;
+    color: $brown;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      background: $gold;
+      color: #fff;
+    }
+
+    &:focus-visible {
+      outline: 3px solid $gold;
+      outline-offset: 3px;
+    }
+  }
+}

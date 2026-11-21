@@ -46,6 +46,8 @@ The API client uses the CDN and the `published` perspective. Published content m
 
 `index.html` supplies the Dutch document language, title, description, root element, and favicon. `src/main.tsx` imports the global SCSS, creates the React root, and renders `App` inside React `StrictMode`.
 
+The temporary coming-soon screen is enabled by `showComingSoon` in `src/App.tsx`. While it is `true`, every website route displays the temporary screen instead of the route table below. Set it to `false` and rebuild/redeploy to restore the full site. This does not change Sanity Studio or its content.
+
 `src/App.tsx` sets up React Router:
 
 | Route | Page | Purpose |

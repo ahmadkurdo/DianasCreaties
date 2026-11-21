@@ -4,19 +4,24 @@ import ComingSoon from '@/pages/ComingSoon/ComingSoon'
 import CatalogPage from '@/pages/Catalog/CatalogPage'
 import CatalogDetailPage from '@/pages/Catalog/CatalogDetailPage'
 import ContactPage from '@/pages/Contact/ContactPage'
+import MaintenancePage from '@/pages/Maintenance/MaintenancePage'
+
+const showComingSoon = true
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<ComingSoon />} />
-        <Route path="/workshops/:id" element={<CatalogDetailPage category="workshops" />} />
-        <Route path="/cakes/:id" element={<CatalogDetailPage category="cakes" />} />
-        <Route path="/workshops" element={<CatalogPage category="workshops" />} />
-        <Route path="/cakes" element={<CatalogPage category="cakes" />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      {showComingSoon ? <MaintenancePage /> : (
+        <Routes>
+          <Route path="/" element={<ComingSoon />} />
+          <Route path="/workshops/:id" element={<CatalogDetailPage category="workshops" />} />
+          <Route path="/cakes/:id" element={<CatalogDetailPage category="cakes" />} />
+          <Route path="/workshops" element={<CatalogPage category="workshops" />} />
+          <Route path="/cakes" element={<CatalogPage category="cakes" />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      )}
       <a
         className="whatsapp-float"
         href={`https://wa.me/31615246591?text=${encodeURIComponent('Hallo Diana, ik heb een vraag over Diana\'s Creaties.')}`}
