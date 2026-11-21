@@ -1,5 +1,6 @@
 import styles from './ComingSoon.module.scss'
 import { Link } from 'react-router-dom'
+import { FiChevronDown, FiGift, FiLayers, FiTruck } from 'react-icons/fi'
 
 const fillingFlavours = [
   'Vanille',
@@ -67,10 +68,19 @@ export default function ComingSoon() {
       </div>
 
       <section className={styles.cakeInfo} aria-labelledby="cake-info-heading">
-        <h2 id="cake-info-heading">Meer over onze taarten</h2>
+        <div className={styles.infoHeading}>
+          <h2 id="cake-info-heading">Meer over onze taarten</h2>
+        </div>
 
         <details className={styles.infoSection}>
-          <summary>Taarten op maat</summary>
+          <summary>
+            <span className={styles.infoIcon}><FiGift aria-hidden="true" /></span>
+            <span className={styles.infoLabel}>
+              <span className={styles.infoTitle}>Taarten op maat</span>
+              <span className={styles.infoHint}>Uw wensen, kleuren en decoraties</span>
+            </span>
+            <FiChevronDown className={styles.infoChevron} aria-hidden="true" />
+          </summary>
           <div className={styles.infoContent}>
             <p>
               Onze taarten worden gemaakt van biscuitdeeg en gevuld met crème en een laagje jam.
@@ -84,7 +94,14 @@ export default function ComingSoon() {
         </details>
 
         <details className={styles.infoSection}>
-          <summary>Smaken van vullingen</summary>
+          <summary>
+            <span className={styles.infoIcon}><FiLayers aria-hidden="true" /></span>
+            <span className={styles.infoLabel}>
+              <span className={styles.infoTitle}>Smaken van vullingen</span>
+              <span className={styles.infoHint}>Van fruitig tot chocolade</span>
+            </span>
+            <FiChevronDown className={styles.infoChevron} aria-hidden="true" />
+          </summary>
           <div className={styles.infoContent}>
             <ul className={styles.flavourList}>
               {fillingFlavours.map((flavour) => <li key={flavour}>{flavour}</li>)}
@@ -93,7 +110,14 @@ export default function ComingSoon() {
         </details>
 
         <details className={styles.infoSection}>
-          <summary>Prijzen, bezorgen en bestellen</summary>
+          <summary>
+            <span className={styles.infoIcon}><FiTruck aria-hidden="true" /></span>
+            <span className={styles.infoLabel}>
+              <span className={styles.infoTitle}>Prijzen, bezorgen en bestellen</span>
+              <span className={styles.infoHint}>Alles voor uw bestelling</span>
+            </span>
+            <FiChevronDown className={styles.infoChevron} aria-hidden="true" />
+          </summary>
           <div className={styles.infoContent}>
             <h3>Prijsindicatie</h3>
             <ul>
